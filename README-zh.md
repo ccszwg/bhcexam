@@ -28,7 +28,7 @@ BHCexam.cls 提供了一个用于排版试卷LaTeX文档类.
 - 支持简答题中的小问及小问的小问
 
 ## 版本历史
-* **version 1.8** (2025.5)
+* **version 1.9** (2025.5)
     * 修复新版本 TexLive 不能在 `DeclareOption` 中读取 `#1`的问题.
     * 为 `questions` 环境的起始位置增加垂直间距.
     * 增加 `linespread` 选项控制行距.

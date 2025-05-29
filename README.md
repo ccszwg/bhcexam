@@ -19,11 +19,10 @@ The `BHCexam.cls` is a LaTeX document class designed for typesetting exams. It i
 - Support for sub-questions and nested sub-questions in short-answer questions.
 
 ## Version History
-* **version 1.8** (2025.5)
+* **version 1.9** (2025.5)
     * fix new version TexLive not supporting fetching `#1` value in `DeclareOption`.
     * add vertical spacing in beginning of  `questions` environment.
     * add `linespread` option to control line spacing.
-
 * **version 1.8** (October 2024)
     * Added `fontset` and `zihao` options to directly pass to `ctex`.
     * Support for adding scores to `\subquestion`.

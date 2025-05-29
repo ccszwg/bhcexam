@@ -1,6 +1,6 @@
 % BHCexam.cls
-% Version: 1.8
-% Date: 2024/10/15
+% Version: 1.9
+% Date: 2025/5/29
 % Author: BAO HONG CHANG
 % Description: An exam class orignally designed for mathematics teachers in China.
 %              Used by Mathcrowd.cn since 2016 as the default class to export exam papers from database.
@@ -10,10 +10,15 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{BHCexam}[2024/10/15 Version 1.8 by BAO HONG CHANG]
+\ProvidesClass{BHCexam}[2025/5/29 Version 1.9 by BAO HONG CHANG]
 
- 
 % Options
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=BHC,prefix=BHC@}
+
+% Boolean options
+ 
 \newif\if@printanswers \@printanswersfalse
 \DeclareOption{answers}{\@printanswerstrue}
 
@@ -23,30 +28,22 @@
 \newif\if@list  \@listfalse
 \DeclareOption{list}{\@listtrue}
 
-% Fontset, zihao, linestretch options
-\def\@fontset{none}
-\def\@zihao{5}
-\def\@linestretch{4}
-\newif\if@fontsetspecified \@fontsetspecifiedfalse
-\DeclareOption{fontset}{\renewcommand{\@fontset}{#1}\@fontsetspecifiedtrue}
-\DeclareOption{zihao}{\renewcommand{\@zihao}{#1}}
-\DeclareOption{linestretch}{\renewcommand{\@linestretch}{#1}}
-
+% String options
+\DeclareStringOption[ubuntu]{fontset}    % 创建 \BHC@fontset，默认值 ubuntu
+\DeclareStringOption[5]{zihao}           % 创建 \BHC@zihao，默认值 5
+\DeclareStringOption[1.3]{linespread}    % 创建 \BHC@linespread，行距，默认值 1.3
+\DeclareStringOption[2]{linestretch}     % 创建 \BHC@linespread，允许拉伸量，默认值 1.5
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessKeyvalOptions*
 \ProcessOptions\relax
 
-% Load required packages
 \LoadClass{article}
 
-% Conditional loading of ctex with fontset option
-\if@fontsetspecified
-    \RequirePackage[fontset = \@fontset, punct=kaiming, zihao = \@zihao]{ctex}
-\else
-    \RequirePackage[punct=kaiming, zihao = \@zihao]{ctex}
-\fi
-
-\ctexset{linestretch = \@linestretch, autoindent = 0pt}
+% Load required packages
+\PassOptionsToPackage{zihao=\BHC@zihao,fontset=\BHC@fontset,punct=kaiming,linespread=\BHC@linespread}{ctex}
+\RequirePackage{ctex}
+\ctexset{autoindent=0,linestretch=\BHC@linestretch}
 \RequirePackage{tabularx, ifthen, xcolor, graphicx, caption}
 \RequirePackage{geometry, fancyhdr, etoolbox, amsmath, amssymb, unicode-math, pifont, bbding, romannum, enumitem}
 
@@ -118,9 +115,6 @@
 	\songti \normalsize
 \endgroup}
 
-% Set default array and baseline stretch
-\renewcommand\arraystretch{1.5}
-\renewcommand{\baselinestretch}{1.5}
 
 % Define counters and flags
 \newcounter{Group}
@@ -166,7 +160,7 @@
 % Define commands (group, question, example, exercise, subquestion)
 \newcommand{\group}[2]{
 	\if@list
-		\item \heiti{#1} \quad \kaishu \small #2 \songti \normalsize \par
+		\item \heiti{#1} \quad \kaishu \small #2 \songti \normalsize \par 
 	\else
 		\stepcounter{Group}
 		\par \heiti{\par \chinese{Group} 、#1} \quad \small{\kaishu #2} \songti \normalsize \par
@@ -175,6 +169,7 @@
 }
 
 \newenvironment{questions}[1][]{
+	\vspace{2mm}
 	\@tfor \@opt :=#1\do
 		{\if\@opt s\global\@showscoretrue\fi
 		 \if\@opt t\global\@showskiptrue\fi
@@ -184,7 +179,7 @@
   		\setcounter{Question}{0}
 	 \fi
 	\if@list
-		\list{\arabic{Question}.}{\setlength{\leftmargin}{0pt}}
+		\par \list{\arabic{Question}.}{\setlength{\leftmargin}{0pt}} \par
 	\else
 		\par \begingroup \par
 	\fi

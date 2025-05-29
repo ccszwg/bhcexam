@@ -28,35 +28,38 @@ BHCexam.cls 提供了一个用于排版试卷LaTeX文档类.
 - 支持简答题中的小问及小问的小问
 
 ## 版本历史
-
+* **version 1.8** (2025.5)
+    * 修复新版本 TexLive 不能在 `DeclareOption` 中读取 `#1`的问题.
+    * 为 `questions` 环境的起始位置增加垂直间距.
+    * 增加 `linespread` 选项控制行距.
 * **version 1.8** (2024.10)
-    * 将 `fontset` 和 `zihao` 选项直接传递给 `ctex`
-    * 支持 `\subquestion` 添加分值
-    * 重新整理了文档及宏包的注释
+    * 将 `fontset` 和 `zihao` 选项直接传递给 `ctex`.
+    * 支持 `\subquestion` 添加分值.
+    * 重新整理了文档及宏包的注释.
     * 针对国标对部分命令(`\parallel`, `\Re`, `\Im`)进行了重新定义.
 * **version 1.7** (2022.8)
   * 针对TeXLive 2022, 修正`ctex`的字号、字体设置. 
 * **version 1.6** (2021.8)
   * 不再使用`stix`数学字体
-  * `ctex` 设置 `punct = kaiming`
+  * `ctex` 设置 `punct = kaiming`.
 * **version 1.5** (2020.6)
-  * `questions` 环境新增 `r` 选项，重置题组的编号;
+  * `questions` 环境新增 `r` 选项，重置题组的编号.
   * 在 `master` 分支中清理历史版本;
-  * 新增 `fandol` 宏包选项以支持 `fandol` 字体;
+  * 新增 `fandol` 宏包选项以支持 `fandol` 字体.
 * **version 1.4** (2020.5)
-  * 支持`subquestion`环境的嵌套;
-  * `\parallel` 命令重定义;
+  * 支持`subquestion`环境的嵌套.
+  * `\parallel` 命令重定义.
 * **version 1.3** (2020.3)
   * 新增 `\sixchoices` , `\threechoices` 命令，以支持对3个和6个选项，并保持智能断行同及选项对齐.
 * **version 1.2** (2020.3)
-  *  支持苹果字体
-  *  使用 `stix` 数学字体
-  *  支持在选择题最后显示右对齐括号
+  *  支持苹果字体.
+  *  使用 `stix` 数学字体.
+  *  支持在选择题最后显示右对齐括号.
 * **version 1.1** (2020.1)
-  * 新增对A3双栏版式的支持
-  * 新增列表样式的试题
+  * 新增对A3双栏版式的支持.
+  * 新增列表样式的试题.
 * **version 1.0** (2019.5)
-  * 弃用 `exam` 而改用 `article` 为基宏包类
+  * 弃用 `exam` 而改用 `article` 为基宏包类.
 
 ## 贡献者
 
